@@ -1,0 +1,38 @@
+{% extends "layout.html" %}
+
+{% block title %}Register - Sanker Mobiles{% endblock %}
+
+{% block content %}
+<div class="container d-flex align-items-center justify-content-center" style="min-height: 80vh;">
+    <div class="card p-4 shadow-lg border-0" style="max-width: 500px; width: 100%;">
+        <div class="text-center mb-4">
+            <h2 class="fw-bold text-primary">Create Account</h2>
+            <p class="text-muted">Join the Sanker Mobiles family</p>
+        </div>
+        <form method="POST">
+            <div class="row">
+                <div class="col-md-12 mb-3">
+                    <label class="form-label">Username</label>
+                    <input type="text" name="username" class="form-control bg-light border-0" required>
+                </div>
+                <div class="col-md-6 mb-3">
+                    <label class="form-label">Email</label>
+                    <input type="email" name="email" class="form-control bg-light border-0" required>
+                </div>
+                <div class="col-md-6 mb-3">
+                    <label class="form-label">Phone</label>
+                    <input type="text" name="phone" class="form-control bg-light border-0" required>
+                </div>
+                <div class="col-md-12 mb-4">
+                    <label class="form-label">Password</label>
+                    <input type="password" name="password" class="form-control bg-light border-0" required>
+                </div>
+            </div>
+            <button type="submit" class="btn btn-gradient w-100 py-3 rounded-pill fw-bold">Register Now</button>
+            <div class="text-center mt-4">
+                <p class="small text-muted mb-0">Already have an account? <a href="{{ url_for('login') }}" class="text-primary text-decoration-none fw-bold">Login here</a></p>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}

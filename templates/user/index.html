@@ -1,0 +1,147 @@
+{% extends "layout.html" %}
+
+{% block title %}Product Showcase - Sanker Mobiles{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+    <!-- Search Bar & Filters (Moved to Top) -->
+    <div class="row justify-content-center mb-5">
+        <div class="col-lg-8">
+            <div class="search-container mb-4">
+                <i class="fas fa-search search-icon"></i>
+                <input type="text" id="productSearch" class="form-control search-input shadow-sm" placeholder="Search mobiles, chargers, smart watches...">
+            </div>
+            <div class="category-filter text-center">
+                <button class="btn btn-category active" data-category="all">All Items</button>
+                {% for category in categories %}
+                <button class="btn btn-category" data-category="{{ category }}">{{ category }}</button>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+
+    <!-- Header -->
+    <div class="text-center mb-5">
+        <h1 class="fw-bold display-4">Welcome to <span class="text-primary">Sanker Mobiles</span></h1>
+        <p class="text-muted fs-5">Premium devices and accessories at your fingertips</p>
+    </div>
+
+    <!-- Product Grid -->
+    <div class="row g-4" id="productGrid">
+        {% for product in products %}
+        <div class="col-sm-6 col-md-4 col-lg-3 product-card" 
+             data-name="{{ product.name }}" 
+             data-brand="{{ product.brand }}" 
+             data-category="{{ product.category }}">
+            <div class="card h-100">
+                <div class="position-relative">
+                    <img src="{{ product.image_url or 'https://via.placeholder.com/300x300?text=No+Image' }}" class="card-img-top" alt="{{ product.name }}">
+                    {% if product.discount > 0 %}
+                    <span class="badge bg-danger position-absolute top-0 end-0 m-3 p-2">{{ product.discount }}% OFF</span>
+                    {% endif %}
+                </div>
+                <div class="card-body">
+                    <small class="text-primary fw-bold text-uppercase">{{ product.category }}</small>
+                    <h5 class="card-title fw-bold mt-1">{{ product.name }}</h5>
+                    <p class="text-muted small mb-2">{{ product.brand }}</p>
+                    
+                    <div class="d-flex align-items-baseline gap-2 mt-auto">
+                        {% set discounted_price = product.price - (product.price * product.discount / 100) - product.fixed_discount %}
+                        <span class="fs-4 fw-bold text-primary">₹{{ discounted_price if discounted_price > 0 else 0 }}</span>
+                        {% if product.discount > 0 or product.fixed_discount > 0 %}
+                        <span class="text-muted text-decoration-line-through small">₹{{ product.price }}</span>
+                        {% endif %}
+                    </div>
+                </div>
+                <div class="card-footer bg-white border-0 pb-3">
+                    <button class="btn btn-gradient w-100 rounded-pill" data-bs-toggle="modal" data-bs-target="#modal-{{ product.id }}">
+                        View Details
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Product Details Modal -->
+        <div class="modal fade" id="modal-{{ product.id }}" tabindex="-1">
+            <div class="modal-dialog modal-lg modal-dialog-centered">
+                <div class="modal-content border-0 rounded-4">
+                    <div class="modal-header border-0 pb-0">
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body p-4">
+                        <div class="row g-4">
+                            <div class="col-md-6">
+                                <img src="{{ product.image_url or 'https://via.placeholder.com/400x400?text=No+Image' }}" class="img-fluid rounded-4 shadow-sm" alt="{{ product.name }}">
+                            </div>
+                            <div class="col-md-6">
+                                <h2 class="fw-bold mb-1">{{ product.name }}</h2>
+                                <p class="text-muted mb-3">{{ product.brand }} | {{ product.category }}</p>
+                                
+                                <div class="d-flex align-items-baseline gap-2 mb-4">
+                                    {% set discounted_price = product.price - (product.price * product.discount / 100) - product.fixed_discount %}
+                                    <span class="fs-2 fw-bold text-primary">₹{{ discounted_price if discounted_price > 0 else 0 }}</span>
+                                    {% if product.discount > 0 or product.fixed_discount > 0 %}
+                                    <span class="fs-5 text-muted text-decoration-line-through">₹{{ product.price }}</span>
+                                    <span class="badge bg-danger p-2">
+                                        {% if product.discount > 0 %}{{ product.discount }}% OFF{% endif %}
+                                        {% if product.fixed_discount > 0 %}+ ₹{{ product.fixed_discount }} OFF{% endif %}
+                                    </span>
+                                    {% endif %}
+                                </div>
+
+                                <div class="mb-4">
+                                    <h6 class="fw-bold mb-2">Key Specifications:</h6>
+                                    <ul class="list-unstyled">
+                                        <li><strong>Material:</strong> {{ product.material or 'N/A' }}</li>
+                                        <li><strong>Size:</strong> {{ product.size or 'N/A' }}</li>
+                                        <li><strong>Color:</strong> {{ product.color or 'N/A' }}</li>
+                                        <li><strong>Shape:</strong> {{ product.shape or 'N/A' }}</li>
+                                        <li><strong>Weight:</strong> {{ product.weight or 'N/A' }}</li>
+                                        <li><strong>Stock:</strong> {{ product.stock }} available</li>
+                                        <li><strong>Warranty:</strong> {{ product.warranty or 'No warranty info' }}</li>
+                                    </ul>
+                                </div>
+
+                                <div class="mb-4">
+                                    <h6 class="fw-bold mb-2">Description:</h6>
+                                    <p class="text-muted small">{{ product.description }}</p>
+                                </div>
+
+                                <div class="alert alert-info border-0 rounded-3 mb-4">
+                                    <i class="fas fa-info-circle me-2"></i> This is a product showcase. Please visit our store to purchase!
+                                </div>
+
+                                <!-- WhatsApp Chat Button -->
+                                <a href="https://wa.me/918610645891?text=I%20am%20interested%20in%20direct%20details%20about%20{{ product.name }}%20({{ product.brand }})%20priced%20at%20₹{{ (product.price - (product.price * product.discount / 100) - product.fixed_discount)|round(2) }}." 
+                                   target="_blank" 
+                                   class="btn btn-success w-100 rounded-pill py-3 fw-bold shadow-sm">
+                                    <i class="fab fa-whatsapp me-2"></i> Chat on WhatsApp
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% else %}
+        <div class="col-12 text-center py-5">
+            <h3 class="text-muted">Oops! No products available at the moment.</h3>
+            <p>Check back soon for latest arrivals.</p>
+        </div>
+        {% endfor %}
+    </div>
+
+    <!-- Future Roadmap Notice -->
+    <div class="mt-5 pt-5 border-top">
+        <div class="row align-items-center bg-light p-5 rounded-4 g-4 shadow-sm">
+            <div class="col-md-8">
+                <h3 class="fw-bold mb-3"><i class="fas fa-rocket text-primary me-2"></i> Coming Soon!</h3>
+                <p class="text-muted mb-0">We are evolving! In the future, you'll be able to place **Orders directly**, make **Secure Payments**, and track **Home Deliveries** right from this website. Stay tuned for these exciting updates!</p>
+            </div>
+            <div class="col-md-4 text-md-end">
+                <span class="badge bg-primary-soft text-primary p-3 rounded-pill fw-bold">Roadmap 2024-2025</span>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

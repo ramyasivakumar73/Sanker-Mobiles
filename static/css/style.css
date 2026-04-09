@@ -1,0 +1,312 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+
+:root {
+    /* Reverted to Indigo/Blue Palette */
+    --primary-color: #4f46e5;
+    --secondary-color: #6366f1;
+    --accent-color: #22d3ee;
+    --bg-gradient: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+    --dark-color: #1e1b4b;
+    --card-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+    --hover-shadow: 0 10px 15px -3px rgba(79, 70, 229, 0.1), 0 4px 6px -2px rgba(79, 70, 229, 0.05);
+    --glass-bg: #ffffff;
+    --glass-border: #e2e8f0;
+}
+
+body {
+    background: var(--bg-gradient);
+    background-attachment: fixed;
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    color: #1e293b;
+    min-height: 100vh;
+}
+
+/* Formal Clean Navbar */
+.navbar {
+    background: #1e1b4b !important;
+    padding: 1rem 0;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.navbar-brand {
+    font-weight: 800;
+    color: white !important;
+    letter-spacing: -0.5px;
+    font-size: 1.4rem;
+}
+
+.navbar-brand i {
+    color: var(--accent-color);
+}
+
+.nav-link {
+    font-weight: 500;
+    color: rgba(255, 255, 255, 0.8) !important;
+    transition: all 0.2s;
+}
+
+.nav-link:hover {
+    color: white !important;
+}
+
+/* Standard Buttons - Blue UI */
+.btn-gradient {
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    color: white;
+    border: none;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 12px rgba(79, 70, 229, 0.2);
+}
+
+.btn-gradient:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(79, 70, 229, 0.3);
+    color: white;
+}
+
+.btn-primary {
+    background: var(--primary-color) !important;
+    border: none !important;
+    font-weight: 600;
+}
+
+.btn-primary:hover {
+    background: var(--secondary-color) !important;
+}
+
+.btn-outline-primary {
+    color: var(--primary-color);
+    border-color: var(--primary-color);
+}
+
+.btn-outline-primary:hover {
+    background-color: var(--primary-color);
+    color: white;
+}
+
+/* General Layout Cards */
+.card {
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 12px;
+    box-shadow: var(--card-shadow);
+    transition: all 0.3s;
+    overflow: hidden;
+}
+
+.card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--hover-shadow);
+    border-color: #cbd5e1;
+}
+
+.card-img-top {
+    height: 200px;
+    object-fit: contain;
+    padding: 1.5rem;
+    transition: transform 0.4s ease;
+    background: #fff;
+    border-bottom: 1px solid #f1f5f9;
+}
+
+.card:hover .card-img-top {
+    transform: scale(1.04);
+}
+
+.card-title {
+    font-weight: 700;
+    color: #0f172a;
+}
+
+/* Search Areas - Neat */
+.search-container {
+    max-width: 600px;
+    margin: 2rem auto;
+    position: relative;
+}
+
+.search-input {
+    border-radius: 8px;
+    padding-left: 3rem;
+    border: 1px solid #cbd5e1;
+    background: #fff;
+    height: 3.5rem;
+    font-size: 1rem;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+    transition: all 0.2s;
+}
+
+.search-input:focus {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.1);
+    background: #fff;
+}
+
+.search-icon {
+    position: absolute;
+    left: 1.2rem;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #94a3b8;
+    font-size: 1.1rem;
+}
+
+/* Product Categories */
+.category-filter {
+    display: flex;
+    overflow-x: auto;
+    gap: 0.6rem;
+    padding: 1rem 0 2rem;
+    scrollbar-width: none;
+}
+
+.category-filter::-webkit-scrollbar {
+    display: none;
+}
+
+.btn-category {
+    white-space: nowrap;
+    border-radius: 8px;
+    padding: 0.5rem 1.2rem;
+    background: #fff;
+    border: 1px solid #e2e8f0;
+    color: #475569;
+    font-weight: 500;
+    font-size: 0.95rem;
+    transition: all 0.2s;
+}
+
+.btn-category.active,
+.btn-category:hover {
+    background: var(--primary-color);
+    color: white;
+    border-color: var(--primary-color);
+}
+
+/* Footer Section */
+.footer {
+    background: #1e1b4b;
+    color: #f1f5f9;
+    padding: 4rem 0 2rem;
+    margin-top: 5rem;
+}
+
+.footer h5 {
+    font-weight: 700;
+    margin-bottom: 1.5rem;
+}
+
+.contact-details {
+    background: rgba(255, 255, 255, 0.05) !important;
+    border: 1px solid rgba(255, 255, 255, 0.1) !important;
+    border-radius: 8px !important;
+}
+
+.contact-icon {
+    width: 24px;
+    margin-right: 12px;
+    color: var(--accent-color) !important;
+}
+
+/* Animations */
+.fade-in {
+    animation: fadeIn 0.4s ease-out;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-weight: 700;
+}
+
+.text-primary {
+    color: var(--primary-color) !important;
+}
+
+.bg-primary {
+    background-color: var(--primary-color) !important;
+}
+
+.badge.bg-danger {
+    background: #ef4444 !important;
+    border-radius: 6px;
+    font-weight: 600;
+}
+
+/* -------------- ADMIN DASHBOARD -------------- */
+.admin-sidebar {
+    background: #ffffff;
+    min-height: calc(100vh - 76px);
+    padding: 2rem 1rem;
+    border-right: 1px solid #e2e8f0;
+}
+
+.admin-nav-link {
+    display: flex;
+    align-items: center;
+    padding: 0.8rem 1rem;
+    color: #475569;
+    text-decoration: none;
+    border-radius: 8px;
+    margin-bottom: 0.5rem;
+    transition: all 0.2s;
+    font-weight: 500;
+}
+
+.admin-nav-link:hover,
+.admin-nav-link.active {
+    background: #f1f5f9;
+    color: var(--primary-color);
+}
+
+.admin-nav-link i {
+    width: 24px;
+    margin-right: 12px;
+    color: #94a3b8;
+}
+
+.admin-nav-link:hover i,
+.admin-nav-link.active i {
+    color: var(--primary-color);
+}
+
+/* Tables Customization */
+.table {
+    border-radius: 8px;
+    overflow: hidden;
+    background: white;
+}
+
+.table thead th {
+    background: #f8fafc !important;
+    color: #475569 !important;
+    font-weight: 600;
+    border-bottom: 1px solid #e2e8f0;
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    padding: 1rem;
+}
+
+.table tbody td {
+    padding: 1rem;
+    vertical-align: middle;
+    border-bottom: 1px solid #f1f5f9;
+}

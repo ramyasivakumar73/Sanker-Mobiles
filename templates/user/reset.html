@@ -1,0 +1,59 @@
+{% extends "layout.html" %}
+
+{% block title %}New Password - Sanker Mobiles{% endblock %}
+
+{% block content %}
+<style>
+    /* Professional Blue & White Theme - Short Layout */
+    .login-container-box {
+        background: linear-gradient(135deg, #2563eb 0%, #3b82f6 50%, #ffffff 100%);
+        border-radius: 16px;
+        padding: 40px 0;
+        margin: 30px auto;
+        box-shadow: 0 10px 30px rgba(37, 99, 235, 0.1);
+        max-width: 800px;
+        width: 100%;
+        border: 1px solid #e2e8f0;
+    }
+
+    .user-card {
+        background: rgba(255, 255, 255, 0.98);
+        border-radius: 12px;
+        box-shadow: 0 8px 20px rgba(0,0,0,0.08) !important;
+    }
+    
+    .input-group-custom {
+        border-radius: 10px;
+        overflow: hidden;
+        border: 1px solid #cbd5e1;
+    }
+</style>
+
+<div class="container py-4">
+    <div class="login-container-box">
+        <div class="row justify-content-center align-items-center" style="min-height: 40vh;">
+            <div class="col-lg-6 col-md-8 col-sm-11">
+                <div class="card p-4 border-0 user-card mx-auto shadow-sm" style="max-width: 400px; width: 100%;">
+                    <div class="text-center mb-4">
+                        <div class="mb-2">
+                            <i class="fas fa-lock-open fa-3x text-primary"></i>
+                        </div>
+                        <h4 class="fw-bold text-dark mb-1">Set New Password</h4>
+                        <p class="text-secondary small">Secure your account with a new password</p>
+                    </div>
+                    <form method="POST">
+                        <div class="mb-4">
+                            <label class="form-label fw-bold text-secondary small">New Secure Password</label>
+                            <div class="input-group input-group-custom shadow-sm bg-white">
+                                <span class="input-group-text bg-transparent border-0"><i class="fas fa-lock text-primary"></i></span>
+                                <input type="password" name="password" class="form-control border-0 bg-transparent" required placeholder="New password" style="padding: 10px;">
+                            </div>
+                        </div>
+                        <button type="submit" class="btn btn-primary w-100 py-3 rounded-3 fw-bold shadow-sm">Update Password</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

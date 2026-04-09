@@ -1,0 +1,66 @@
+{% extends "layout.html" %}
+
+{% block title %}Admin Login - Sanker Mobiles{% endblock %}
+
+{% block content %}
+<style>
+    /* Professional Blue & White Theme - Short Layout */
+    .admin-container-box {
+        background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 50%, #ffffff 100%);
+        border-radius: 16px;
+        padding: 40px 0; /* Decreased Length */
+        margin: 30px auto;
+        box-shadow: 0 10px 30px rgba(30, 58, 138, 0.1);
+        max-width: 800px;
+        width: 100%;
+        border: 1px solid #e2e8f0;
+    }
+
+    .admin-card {
+        background: rgba(255, 255, 255, 0.98);
+        border-radius: 12px;
+        box-shadow: 0 8px 20px rgba(0,0,0,0.08) !important;
+    }
+    
+    .input-group-custom {
+        border-radius: 10px;
+        overflow: hidden;
+        border: 1px solid #cbd5e1;
+    }
+</style>
+
+<div class="container py-4">
+    <div class="admin-container-box">
+        <div class="row justify-content-center align-items-center" style="min-height: 40vh;">
+            <div class="col-lg-6 col-md-8 col-sm-11">
+                <div class="card p-4 border-0 admin-card mx-auto shadow-sm" style="max-width: 400px; width: 100%;">
+                    <div class="text-center mb-5">
+                        <h4 class="fw-bold text-dark mb-1">Admin Portal</h4>
+                        <p class="text-secondary small fw-bold text-uppercase" style="letter-spacing: 1px;">Secure Authorization Only</p>
+                    </div>
+                    <form method="POST">
+                        <div class="mb-4">
+                            <label class="form-label fw-bold text-dark small text-uppercase" style="letter-spacing: 0.5px;">Username</label>
+                            <div class="input-group input-group-custom shadow-sm bg-white">
+                                <span class="input-group-text bg-transparent border-0"><i class="fas fa-user-shield text-primary"></i></span>
+                                <input type="text" name="username" class="form-control border-0 bg-transparent" required placeholder="Admin ID" style="padding: 10px;">
+                            </div>
+                        </div>
+                        <div class="mb-5">
+                            <label class="form-label fw-bold text-dark small text-uppercase" style="letter-spacing: 0.5px;">Password</label>
+                            <div class="input-group input-group-custom shadow-sm bg-white">
+                                <span class="input-group-text bg-transparent border-0"><i class="fas fa-key text-primary"></i></span>
+                                <input type="password" name="password" class="form-control border-0 bg-transparent" required placeholder="Access Key" style="padding: 10px;">
+                            </div>
+                            <div class="text-end mt-2">
+                                <a href="{{ url_for('forgot_password') }}" class="text-primary text-decoration-none small fw-bold">Forgot Password?</a>
+                            </div>
+                        </div>
+                        <button type="submit" class="btn btn-primary w-100 py-2 rounded-3 fw-bold shadow-sm" style="background: #1e3a8a; border: none;">Login to Dashboard</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

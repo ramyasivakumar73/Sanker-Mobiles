@@ -1,0 +1,129 @@
+{% extends "layout.html" %}
+
+{% block title %}{{ action }} Product - Sanker Mobiles{% endblock %}
+
+{% block content %}
+<div class="container my-5">
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{{ url_for('dashboard') }}">Dashboard</a></li>
+            <li class="breadcrumb-item active">{{ action }} Product</li>
+        </ol>
+    </nav>
+
+    <div class="card border-0 shadow-sm">
+        <div class="card-body p-4">
+            <h2 class="fw-bold mb-4">{{ action }} Product</h2>
+            
+            <form method="POST" enctype="multipart/form-data">
+                <div class="row g-4">
+                    <!-- Basic Info -->
+                    <div class="col-md-6">
+                        <label class="form-label fw-bold">Product Name</label>
+                        <input type="text" name="name" class="form-control" value="{{ product.name if product else '' }}" required>
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label fw-bold">Brand</label>
+                        <input type="text" name="brand" class="form-control" value="{{ product.brand if product else '' }}">
+                    </div>
+
+                    <!-- Pricing -->
+                    <div class="col-md-3">
+                        <label class="form-label fw-bold">Price (₹)</label>
+                        <input type="number" step="0.01" name="price" class="form-control" value="{{ product.price if product else '' }}" required>
+                    </div>
+                    <div class="col-md-3">
+                        <label class="form-label fw-bold">Discount (%)</label>
+                        <input type="number" step="0.1" name="discount" class="form-control" value="{{ product.discount if product else '0' }}">
+                    </div>
+                    <div class="col-md-3">
+                        <label class="form-label fw-bold">Regular Customer Discount (₹/Qty)</label>
+                        <input type="number" step="1" name="fixed_discount" class="form-control" value="{{ product.fixed_discount if product else '0' }}" placeholder="e.g. 500">
+                    </div>
+                    <div class="col-md-3">
+                        <label class="form-label fw-bold">Stock Quantity</label>
+                        <input type="number" name="stock" class="form-control" value="{{ product.stock if product else '0' }}">
+                    </div>
+
+                    <!-- Category & Specs -->
+                    <div class="col-md-6">
+                        <label class="form-label fw-bold">Category</label>
+                        <select name="category" class="form-select" required>
+                            {% for cat in categories %}
+                            <option value="{{ cat }}" {% if product and product.category == cat %}selected{% endif %}>{{ cat }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label fw-bold">Quality / Condition</label>
+                        <input type="text" name="quality" class="form-control" value="{{ product.quality if product else 'New' }}">
+                    </div>
+
+                    <!-- Details -->
+                    <div class="col-md-2">
+                        <label class="form-label fw-bold">Material</label>
+                        <input type="text" name="material" class="form-control" value="{{ product.material if product else '' }}">
+                    </div>
+                    <div class="col-md-2">
+                        <label class="form-label fw-bold">Size</label>
+                        <input type="text" name="size" class="form-control" value="{{ product.size if product else '' }}">
+                    </div>
+                    <div class="col-md-2">
+                        <label class="form-label fw-bold">Color</label>
+                        <input type="text" name="color" class="form-control" value="{{ product.color if product else '' }}">
+                    </div>
+                    <div class="col-md-2">
+                        <label class="form-label fw-bold">Shape</label>
+                        <input type="text" name="shape" class="form-control" value="{{ product.shape if product else '' }}">
+                    </div>
+                    <div class="col-md-2">
+                        <label class="form-label fw-bold">Weight</label>
+                        <input type="text" name="weight" class="form-control" value="{{ product.weight if product else '' }}">
+                    </div>
+                    <div class="col-md-2">
+                        <label class="form-label fw-bold">Warranty</label>
+                        <input type="text" name="warranty" class="form-control" value="{{ product.warranty if product else '' }}">
+                    </div>
+
+                    <!-- Description -->
+                    <div class="col-12">
+                        <label class="form-label fw-bold">Description</label>
+                        <textarea name="description" class="form-control" rows="4">{{ product.description if product else '' }}</textarea>
+                    </div>
+
+                    <!-- Image Section -->
+                    <div class="col-12">
+                        <div class="card bg-light border-0">
+                            <div class="card-body">
+                                <label class="form-label fw-bold">Product Image</label>
+                                <div class="row g-3">
+                                    <div class="col-md-6">
+                                        <p class="small text-muted mb-1">Upload File</p>
+                                        <input type="file" name="file" class="form-control" accept="image/*" capture="environment">
+                                    </div>
+                                    <div class="col-md-6">
+                                        <p class="small text-muted mb-1">Or Image URL</p>
+                                        <input type="text" name="image_url" class="form-control" value="{{ product.image_url if product else '' }}" placeholder="https://example.com/image.jpg">
+                                    </div>
+                                </div>
+                                {% if product and product.image_url %}
+                                <div class="mt-3">
+                                    <p class="small text-muted mb-1">Current Image:</p>
+                                    <img src="{{ product.image_url }}" class="rounded shadow-sm" style="max-width: 150px;">
+                                </div>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-12 text-end mt-4">
+                        <button type="submit" class="btn btn-gradient px-5 py-2 rounded-pill fw-bold">
+                            <i class="fas fa-save me-2"></i> {{ action }} Product
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}
